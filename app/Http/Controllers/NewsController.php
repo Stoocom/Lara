@@ -3,23 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DbController;
 use Illuminate\Http\Request;
 use App\Models\News;
+use Illuminate\Support\Facades\DB;
 
 
 class NewsController extends Controller
 { 
-    private $categories = [
-        1 => [
-            'title' => 'sport',
-        ],
-        2 => [
-            'title' => 'political',
-        ],
-        3 => [
-            'title' => 'stock_market',
-        ],
-    ];
 
     private $menu = [
         [
@@ -37,13 +28,16 @@ class NewsController extends Controller
     ];
     
     public function index() { 
+        $categories = (new DbController())->getCategories();
         return view('categories', [
             'html' => "Категории",
-            'categoriesOfNews' => $this->categories,
+            'categoriesOfNews' => $categories,
             ]);
     }
     public function list($categoryId) {
+        
         $newsOne = (new News())->getNewsByIdCategory($categoryId);
+        
         return view('news', 
             [
                 'newsOne' => $newsOne
@@ -98,5 +92,6 @@ class NewsController extends Controller
         }
         return $category_news;
     }
+
 
 }

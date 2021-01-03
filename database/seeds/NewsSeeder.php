@@ -22,6 +22,7 @@ class NewsSeeder extends Seeder
         $data = [];
         for ($i = 0; $i < 10; $i++) {
             $data[] = [
+                'id_category' => $fakeData->randomElement([1,2,3]),
                 'title' => $fakeData->sentence(rand(3,5)),
                 'description' => $fakeData->realText(rand(50,100)),
                 'active' => (boolean)rand(0,1),

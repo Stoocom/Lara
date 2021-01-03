@@ -6,28 +6,14 @@ use Illuminate\Support\Facades\DB;
 
 class DbController extends Controller
 {
-    public function index() {
+    public function getCategories() {
 
-        /*
-        $sql = "CREATE TABLE test (
-            id int PRIMARY KEY AUTO_INCREMENT,
-            content varchar(50)
-        )";
-        DB::statement($sql);
-        echo "complete"; 
-        */
-        /*
-        $sql = "INSERT INTO test (content) VALUES (:content)";
+        return DB::select("SELECT * FROM categories");
 
-        $result = DB::insert($sql, [':content' => 'test']);
-        */
+    }
+    public function getNews() {
 
-        //$result = DB::table('test')
-        //    ->get();
-        $result = DB::select("SELECT * FROM test WHERE id = :id", [':id' => 4]);
-
-        dd($result);
-        //echo "complete"; exit;
+        return DB::select("SELECT * FROM news");
 
     }
 }

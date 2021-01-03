@@ -4,22 +4,10 @@ namespace App\Http\Controllers;
 
 //use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class CategoryOfNewsController extends Controller
 { 
-
-    private $categoriesOfNews = [
-        1 => [
-            'title' => 'sport',
-        ],
-        2 => [
-            'title' => 'political',
-        ],
-        3 => [
-            'title' => 'stock_market',
-        ],
-    ];
 
     private $news = [
         [
@@ -48,18 +36,20 @@ class CategoryOfNewsController extends Controller
     
     public function getCategories()
     {
+        $categories = DB::select("SELECT * FROM categories");
         $array = [];
-        foreach ($this->categoriesOfNews as $key => $item) {
-            $array[] = $item['title'];
+        foreach ($categories as $key => $item) {
+            $array[] = $item->title;
         }
         return $array;
     }
 
     public function showCategories()
-    {
+    {   
+        $categories = DB::select("SELECT * FROM categories");
         return view('categories', [
             'html' => "Категории",
-            'categoriesOfNews' => $this->categoriesOfNews
+            'categoriesOfNews' => $categories
             ]);
     }
 
@@ -72,9 +62,10 @@ class CategoryOfNewsController extends Controller
     }
 
     private function getNewsByIdCategory($id) {
+        $news = DB::select("SELECT * FROM news");
         $category_news = [];
-        foreach ($this->news as $keys => $item) {
-            if ($item['id_category'] == $id) {
+        foreach ($news as $keys => $item) {
+            if ($item->id_category == $id) {
                 array_push($category_news, $item);
             }
         }

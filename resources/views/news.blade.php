@@ -10,10 +10,11 @@
 @if (count($newsOne) > 0)
     @foreach($newsOne as $item)
     @php
-        $routeName = route('news::news-one', ['id' => $item['id']]);
+        //dd($item);
+        $routeName = route('news::news-one', ['id' => $item->id]);
     @endphp
     <div>
-        <a href='{{$routeName}}'>{{$item['title']}}</a>
+        <a href='{{$routeName}}'>{{$item->title}}</a>
     </div>
     @endforeach
 @else

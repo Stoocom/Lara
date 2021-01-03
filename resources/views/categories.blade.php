@@ -8,12 +8,13 @@
 <body>
 @include('blocks.menu')
     {{$html}}
-@forelse ($categoriesOfNews as $id => $item)
+@forelse ($categoriesOfNews as $item)
     @php
-    $routeName = route('news::list', ['categoryId' => $id]);
+    //dd($item->id);
+    $routeName = route('news::list', ['categoryId' => $item->id]);
     @endphp
     <div>
-        <a href="{{$routeName}}">{{$item['title']}}</a>
+        <a href="{{$routeName}}">{{$item->title}}</a>
     </div>
 @empty
     <p>Категорий нет</p>
