@@ -8,10 +8,10 @@
 <body>
 @include('blocks.menu')
     {{$html}}
-@forelse ($categoriesOfNews as $item)
+@forelse ($categories as $item)
     @php
     //dd($item->id);
-    $routeName = route('news::list', ['categoryId' => $item->id]);
+    $routeName = route('news::list', $item->id);
     @endphp
     <div>
         <a href="{{$routeName}}">{{$item->title}}</a>

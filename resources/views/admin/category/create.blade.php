@@ -9,11 +9,11 @@
 @extends('layouts.main')
 @section('content')
 @php
-    $routeName = route('create');
+    //$routeName = route('create');
 @endphp
 <div class="row justify-content-center">
     <div class="col-md-6">
-        {!! Form::open(array('route' => 'create_action')) !!}
+        {!! Form::open(array('route' => 'category_create_action')) !!}
         <h3 class="mb-3 mb-4">Создание новой категории</h3>
         <div class="form-group">
         {!! Form::text("news[title]",'', ['class' => 'form-control']) !!}

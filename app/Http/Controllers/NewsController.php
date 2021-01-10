@@ -6,47 +6,36 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\DbController;
 use Illuminate\Http\Request;
 use App\Models\News;
+use App\Models\Categories;
 use Illuminate\Support\Facades\DB;
 
 
 class NewsController extends Controller
 { 
 
-    private $menu = [
-        [
-            'title' => 'Главная',
-            'alias' => 'home',
-        ],
-        [
-            'title' => 'Новости',
-            'alias' => 'news::categories',
-        ],
-        [
-            'title' => 'О компании',
-            'alias' => 'about',
-        ],
-    ];
     
-    public function index() { 
-        $categories = (new DbController())->getCategories();
+    public function index(Categories $categories) { 
+        //$categories = (new DbController())->getCategories();
         return view('categories', [
             'html' => "Категории",
-            'categoriesOfNews' => $categories,
+            'categories' => $categories::all(),
             ]);
     }
     public function list($categoryId) {
         
-        $newsOne = (new News())->getNewsByIdCategory($categoryId);
+        $newsOne = News::query()
+            ->where('id_category', $categoryId)
+            ->get();
         
         return view('news', 
             [
-                'newsOne' => $newsOne
+                'news' => $newsOne
             ]);
         
     }
 
     public function getOneNews($id) {
-        $newsOne = (new News())->getNewsById($id);
+        $newsOne = News::find($id);
         return view('news_one', 
             [
                 'one' => $newsOne

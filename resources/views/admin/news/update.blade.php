@@ -4,25 +4,12 @@
 
 <h4 class="ml-5 text-success">{{$html}}</h4>
 @php
-    //dd($categories);
-    $arrayTitles = $categories->toArray();
-    $arrayTitlesNew = [];    
+    //dd($newsOne);
 @endphp
-@foreach($arrayTitles as $id => $item)
-    @php
-        //dd($item['title']);
-        $arrayTitlesNew[] = $item['title'];
-        //dd($arrayTitlesNew);
-    @endphp
-@endforeach
-
 <div class="row justify-content-center">
     <div class="col-md-6">
-        {!! Form::open(array('route' => 'news_create_action')) !!}
-            <div class="ml-2 mr-2 mt-3 mb-4 row">
-                <p class="mr-3">Выбор категории</p>
-                {!! Form::select('news[category]', $arrayTitlesNew) !!}
-            </div>
+        {!! Form::open(array('route' => array('admin_news_update_action', $newsOne->id))) !!}
+        <h3 class="mb-3 mb-4">Изменение новости</h3>
         <div class="form-group">
         {!! Form::text("news[title]",'', ['class' => 'form-control']) !!}
         </div>
@@ -32,15 +19,12 @@
         <div class="form-group">
         {!! Form::submit("submit", ['class' => 'btn btn-success']) !!}
         </div>
-        
         {!! Form::close() !!}       
     </div>
 </div> 
+
 @endsection
  
 @section('title')
-    Создание новости
+    Новость $newsOne->title
 @endsection
-  
-</body>
-</html>
