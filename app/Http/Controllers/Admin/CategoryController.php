@@ -44,7 +44,8 @@ class CategoryController extends Controller
         //var_dump($request->all());
         if ($request->isMethod('POST')) {
             $category = Categories::find($id);
-            $category->title = $request->input('news')['title'];
+            //$category->title = $request->input('news')['title'];
+            $category->fill($request->all());
             $category->save();
         }
         return redirect('admin');

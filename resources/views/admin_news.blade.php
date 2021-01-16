@@ -19,6 +19,9 @@
     @empty
         <p>Категорий нет</p>
     @endforelse
+    <div class="row justify-content-center">
+        {{$news->links()}}
+    </div>
 @endsection
  
 @section('title')
