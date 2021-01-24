@@ -12,8 +12,14 @@ use App\Models\News;
 
 class NewsController extends Controller
 { 
+
+    // public function __construct() {
+    //     $this->middleware = ['locale'];
+    // }
+
     public function index(Categories $categories) {
         //echo __('test.test'); exit; 
+        //dd(\App::getLocale());
         return view('admin111', [
             'categories' => $categories::all(),
             'admin_menu' => (new Menu())->getAdminMenu(),
@@ -58,8 +64,6 @@ class NewsController extends Controller
         return redirect('admin');
     }
 
-
-
     public function createView() {
         //$categories = Categories::all();
         return view('admin.news.create', [
@@ -71,7 +75,10 @@ class NewsController extends Controller
     }
 
     public function create(AdminNewsCreateRequest $request) {
-        //AdminNewsCreateRequest
+        
+        
+        //dd(\Session::all());
+
         //$this->validate($request, News::rules(), ['required' => "Прошу тебя заполни поле :attribute"],  ['news.title' => 'Заголовок']);
 
         // $validator = \Validator::make(

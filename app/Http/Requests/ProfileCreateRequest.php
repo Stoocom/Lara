@@ -4,12 +4,12 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminNewsCreateRequest extends FormRequest
+class ProfileCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
-     * @return bool
+     * 
      */
     public function authorize()
     {
@@ -24,14 +24,9 @@ class AdminNewsCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'news.title' => 'required|min:5|max:255|unique:news',
-            'news.content' => 'required',
-            'news.id_category' => 'required|exists:categories,id|integer',
+            'name' => 'required|string|max:10',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'string|min:3',
         ];
-    }
-
-    public function required()
-    {
-        return ['required' => "Необходимо заполнить поле :attribute"];
     }
 }

@@ -2,7 +2,6 @@
 @section('content')
 @include('blocks.admin_menu')
 @forelse ($categories as $item)
-<?php phpinfo(); ?>
     @php
     
     $routeName = route('news::list', $item->id);

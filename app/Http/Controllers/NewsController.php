@@ -35,6 +35,9 @@ class NewsController extends Controller
     }
 
     public function getOneNews($id) {
+        session()->push('last_viewed_news', $id);
+        //$_SESSION['last_viewed_news'][] = $id; // второй вариант
+        dump(session()->all());
         $newsOne = News::find($id);
         return view('news_one', 
             [

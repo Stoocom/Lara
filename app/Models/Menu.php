@@ -20,7 +20,7 @@ class Menu
         [
             'title' => 'Админка',
             'alias' => 'admin111',
-        ],
+        ]
     ];
 
     private $admin_menu = [
