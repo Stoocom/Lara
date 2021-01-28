@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\CategoryOfNewsController;
 use \App\Http\Controllers\DbController;
 //use Illuminate\Support\Facades\Auth;
-//use \App\Http\Controllers\Admin\NewsController;
+use \App\Http\Controllers\Admin\ParserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -102,8 +102,6 @@ Route::post('admin/news/create', [
     'uses' => '\App\Http\Controllers\Admin\NewsController@create'
 ])->name('news_create_action')->middleware(['auth', 'is.admin']);
 
-
-
 Route::get('admin/category/create', [
     'uses' => '\App\Http\Controllers\Admin\CategoryController@createView'
 ])->name('category_create')->middleware(['auth', 'is.admin']);
@@ -127,3 +125,4 @@ Route::match(['get', 'post'], '/admin/profile/update',
 //Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('admin/profile/parser', [ParserController::class, 'index'])->name('parser');
