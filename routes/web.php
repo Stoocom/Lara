@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\CategoryOfNewsController;
 use \App\Http\Controllers\DbController;
 //use Illuminate\Support\Facades\Auth;
-//use \App\Http\Controllers\Admin\NewsController;
+use \App\Http\Controllers\Admin\ParserController;
+use \App\Http\Controllers\SocialController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,8 +38,7 @@ Route::group([
 ], function () {
     Route::get('/', [
         'uses' => '\App\Http\Controllers\NewsController@index'
-    ])
-        ->name('categories');
+    ])->name('categories');
     //'uses' => [NewsController::class, 'index'] 
     //]);
     Route::get('/card/{id}', [
@@ -102,8 +102,6 @@ Route::post('admin/news/create', [
     'uses' => '\App\Http\Controllers\Admin\NewsController@create'
 ])->name('news_create_action')->middleware(['auth', 'is.admin']);
 
-
-
 Route::get('admin/category/create', [
     'uses' => '\App\Http\Controllers\Admin\CategoryController@createView'
 ])->name('category_create')->middleware(['auth', 'is.admin']);
@@ -111,6 +109,7 @@ Route::get('admin/category/create', [
 Route::post('admin/category/create', [
     'uses' => '\App\Http\Controllers\Admin\CategoryController@create'
 ])->name('category_create_action')->middleware(['auth', 'is.admin']);
+
 
 
 Route::get('/db', [DbController::class, 'index']);
@@ -127,3 +126,14 @@ Route::match(['get', 'post'], '/admin/profile/update',
 //Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('admin/profile/parser', [ParserController::class, 'index'])->name('parser');
+
+Route::group([
+    'prefix' => 'social',
+    'as' => 'social::',
+], function () {
+    Route::get('/login/{provider}', [SocialController::class, 'login'])
+        ->name('login-social');
+    Route::get('/login/response/{provider}', [SocialController::class, 'response'])
+        ->name('response-social');
+});
