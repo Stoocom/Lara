@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Orchestra\Parser\XmlServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class,
         /* 
          * Package Service Providers...
          */
